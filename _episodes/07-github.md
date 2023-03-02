@@ -267,7 +267,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI
 ~~~
 {: .output}
 
-![Setup ssh key on gitlab](../fig/fig/gitlab-ssh-key.png)
+![Setup ssh key on gitlab](../fig/gitlab-ssh-key.png)
 
 Now, going to git.ecdf.ed.ac.uk, click on your profile icon in the top right corner to get the drop-down menu.  Click "Preferences," then on the 
 settings page, click "SSH keys," on the left side "Account settings" menu. Paste your public SSH key, which is usually contained in the file `~/.ssh/id_ed25519.pub` or `~/.ssh/id_rsa.pub` and begins with `ssh-ed25519` or `ssh-rsa`. Do not paste your private SSH key, as that can compromise your identity. Click the "Add  key" button on the right side. Now, 
