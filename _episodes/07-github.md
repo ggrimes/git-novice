@@ -1,5 +1,5 @@
 ---
-title: Remotes in GitHub
+title: Remotes in GitLab
 teaching: 45
 exercises: 0
 questions:
@@ -29,26 +29,24 @@ Let's start by sharing the changes we've made to our current project with the
 world. To this end we are going to create a *remote* repository that will be linked to our *local* repository.
 
 ## 1. Create a remote repository
-Log in to [GitHub](https://github.com), then click on the icon in the top right corner to
+Log in to [GitLab](https://git.ecdf.ed.ac.uk/) using your Univeristy username and password, then click on the icon, create project, in the top right corner to
 create a new repository called `planets`:
 
-![Creating a Repository on GitHub (Step 1)](../fig/github-create-repo-01.png)
+![Creating a Repository on GitLab (Step 1)](../fig/gitlab-create-repo-01.png)
 
-Name your repository "planets" and then click "Create Repository".
+Name your repository "planets", set Visibility Leve Public and then click "Create Project".
 
 Note: Since this repository will be connected to a local repository, it needs to be empty. Leave 
-"Initialize this repository with a README" unchecked, and keep "None" as options for both "Add 
-.gitignore" and "Add a license." See the "GitHub License and README files" exercise below for a full 
-explanation of why the repository needs to be empty.
+"Initialize this repository with a README" unchecked.
 
-![Creating a Repository on GitHub (Step 2)](../fig/github-create-repo-02.png)
+![Creating a Repository on GitLab (Step 2)](../fig/gitlab-create-repo-02.png)
 
-As soon as the repository is created, GitHub displays a page with a URL and some
+As soon as the repository is created, GitLab displays a page with a URL and some
 information on how to configure your local repository:
 
-![Creating a Repository on GitHub (Step 3)](../fig/github-create-repo-03.png)
+![Creating a Repository on GitLab (Step 3)](../fig/gitlab-create-repo-03.png)
 
-This effectively does the following on GitHub's servers:
+This effectively does the following on GitLab's servers:
 
 ~~~
 $ mkdir planets
@@ -65,18 +63,18 @@ which looked like this:
 
 Now that we have two repositories, we need a diagram like this:
 
-![Freshly-Made GitHub Repository](../fig/git-freshly-made-github-repo.svg)
+![Freshly-Made GitLab Repository](../fig/git-freshly-made-github-repo.svg)
 
 Note that our local repository still contains our earlier work on `mars.txt`, but the
-remote repository on GitHub appears empty as it doesn't contain any files yet.
+remote repository on GitLab appears empty as it doesn't contain any files yet.
 
 ## 2. Connect local to remote repository
 Now we connect the two repositories.  We do this by making the
-GitHub repository a [remote]({{ page.root}}{% link reference.md %}#remote) for the local repository.
-The home page of the repository on GitHub includes the URL string we need to
+GitLab repository a [remote]({{ page.root}}{% link reference.md %}#remote) for the local repository.
+The home page of the repository on GitLab includes the URL string we need to
 identify it:
 
-![Where to Find Repository URL on GitHub](../fig/github-find-repo-string.png)
+![Where to Find Repository URL on GitLab](../fig/gitlab-find-repo-string.png)
 
 Click on the 'SSH' link to change the [protocol]({{ page.root }}{% link reference.md %}#protocol) from HTTPS to SSH.
 
@@ -84,17 +82,17 @@ Click on the 'SSH' link to change the [protocol]({{ page.root }}{% link referenc
 >
 > We use SSH here because, while it requires some additional configuration, it is a 
 > security protocol widely used by many applications.  The steps below describe SSH at a 
-> minimum level for GitHub. A supplemental episode to this lesson discusses advanced setup 
+> minimum level for GitLab. A supplemental episode to this lesson discusses advanced setup 
 > and concepts of SSH and key pairs, and other material supplemental to git related SSH. 
 {: .callout}
 
-![Changing the Repository URL on GitHub](../fig/github-change-repo-string.png)
+![Changing the Repository URL on GitLab](../fig/gitlab-change-repo-string.png)
 
 Copy that URL from the browser, go into the local `planets` repository, and run
 this command:
 
 ~~~
-$ git remote add origin git@github.com:vlad/planets.git
+$ git remote add origin git@git.ecdf.ed.ac.uk:vlad/planets.git
 ~~~
 {: .language-bash}
 
@@ -103,7 +101,7 @@ difference should be your username instead of `vlad`.
 
 `origin` is a local name used to refer to the remote repository. It could be called
 anything, but `origin` is a convention that is often used by default in git
-and GitHub, so it's helpful to stick with this unless there's a reason not to.
+and GitLab, so it's helpful to stick with this unless there's a reason not to.
 
 We can check that the command has worked by running `git remote -v`:
 
@@ -113,8 +111,8 @@ $ git remote -v
 {: .language-bash}
 
 ~~~
-origin   git@github.com:vlad/planets.git (fetch)
-origin   git@github.com:vlad/planets.git (push)
+origin   git@git.ecdf.ed.ac.uk:vlad/planets.git (fetch)
+origin   git@git.ecdf.ed.ac.uk:vlad/planets.git (push)
 ~~~
 {: .output}
 
@@ -122,15 +120,15 @@ We'll discuss remotes in more detail in the next episode, while
 talking about how they might be used for collaboration.
 
 ## 3. SSH Background and Setup
-Before Dracula can connect to a remote repository, he needs to set up a way for his computer to authenticate with GitHub so it knows it’s him trying to connect to his remote repository. 
+Before Dracula can connect to a remote repository, he needs to set up a way for his computer to authenticate with GitLab so it knows it’s him trying to connect to his remote repository. 
 
 We are going to set up the method that is commonly used by many different services to authenticate access on the command line.  This method is called Secure Shell Protocol (SSH).  SSH is a cryptographic network protocol that allows secure communication between computers using an otherwise insecure network.  
 
 SSH uses what is called a key pair. This is two keys that work together to validate access. One key is publicly known and called the public key, and the other key called the private key is kept private. Very descriptive names.
 
-You can think of the public key as a padlock, and only you have the key (the private key) to open it. You use the public key where you want a secure method of communication, such as your GitHub account.  You give this padlock, or public key, to GitHub and say “lock the communications to my account with this so that only computers that have my private key can unlock communications and send git commands as my GitHub account.”  
+You can think of the public key as a padlock, and only you have the key (the private key) to open it. You use the public key where you want a secure method of communication, such as your GitLab account.  You give this padlock, or public key, to GitLab and say “lock the communications to my account with this so that only computers that have my private key can unlock communications and send git commands as my GitLab account.”  
 
-What we will do now is the minimum required to set up the SSH keys and add the public key to a GitHub account.
+What we will do now is the minimum required to set up the SSH keys and add the public key to a GitLab account.
 
 > ## Advanced SSH
 > A supplemental episode in this lesson discusses SSH and key pairs in more depth and detail. 
@@ -235,27 +233,27 @@ drwxr-xr-x 1 Vlad Dracula 197121   0 Jul 16 14:48 ../
 ~~~
 {: .output}
 
-### 3.2 Copy the public key to GitHub
-Now we have a SSH key pair and we can run this command to check if GitHub can read our authentication.  
+### 3.2 Copy the public key to GitLab
+Now we have a SSH key pair and we can run this command to check if GitLab can read our authentication.  
 
 ~~~
-ssh -T git@github.com
+ssh -T git@git.ecdf.ed.ac.uk
 ~~~
 {: .language-bash}
 
 
 ~~~
-The authenticity of host 'github.com (192.30.255.112)' can't be established.
+The authenticity of host 'git.ecdf.ed.ac.uk (192.30.255.112)' can't be established.
 RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
 This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? y
 Please type 'yes', 'no' or the fingerprint: yes
-Warning: Permanently added 'github.com' (RSA) to the list of known hosts.
-git@github.com: Permission denied (publickey).
+Warning: Permanently added 'git.ecdf.ed.ac.uk' (RSA) to the list of known hosts.
+git.ecdf.ed.ac.uk: Permission denied (publickey).
 ~~~
 {: .output}
 
-Right, we forgot that we need to give GitHub our public key!  
+Right, we forgot that we need to give GitLab our public key!  
 
 First, we need to copy the public key.  Be sure to include the `.pub` at the end, otherwise you’re looking at the private key. 
 
@@ -269,19 +267,19 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI
 ~~~
 {: .output}
 
-Now, going to GitHub.com, click on your profile icon in the top right corner to get the drop-down menu.  Click "Settings," then on the 
+Now, going to Git.ecdf.ed.ac.uk, click on your profile icon in the top right corner to get the drop-down menu.  Click "Settings," then on the 
 settings page, click "SSH and GPG keys," on the left side "Account settings" menu.  Click the "New SSH key" button on the right side. Now, 
 you can add the title (Dracula uses the title "Vlad's Lab Laptop" so he can remember where the original key pair
 files are located), paste your SSH key into the field, and click the "Add SSH key" to complete the setup.
 
 Now that we’ve set that up, let’s check our authentication again from the command line. 
 ~~~
-$ ssh -T git@github.com
+$ ssh -T git@git.ecdf.ed.ac.uk
 ~~~
 {: .language-bash}
 
 ~~~
-Hi Vlad! You've successfully authenticated, but GitHub does not provide shell access.
+Welcome to GitLab, @vlad!
 ~~~
 {: .output}
 
@@ -290,7 +288,7 @@ Good! This output confirms that the SSH key works as intended. We are now ready 
 ## 4. Push local changes to a remote
 
 Now that authentication is setup, we can return to the remote.  This command will push the changes from
-our local repository to the repository on GitHub:
+our local repository to the repository on GitLab:
 
 ~~~
 $ git push origin main
@@ -308,7 +306,7 @@ Compressing objects: 100% (11/11), done.
 Writing objects: 100% (16/16), 1.45 KiB | 372.00 KiB/s, done.
 Total 16 (delta 2), reused 0 (delta 0)
 remote: Resolving deltas: 100% (2/2), done.
-To https://github.com/vlad/planets.git
+To https://git.ecdf.ed.ac.uk/vlad/planets.git
  * [new branch]      main -> main
 ~~~
 {: .output}
@@ -360,7 +358,7 @@ To https://github.com/vlad/planets.git
 
 Our local and remote repositories are now in this state:
 
-![GitHub Repository After First Push](../fig/github-repo-after-first-push.svg)
+![GitLab Repository After First Push](../fig/github-repo-after-first-push.svg)
 
 > ## The '-u' Flag
 >
@@ -379,7 +377,7 @@ $ git pull origin main
 {: .language-bash}
 
 ~~~
-From https://github.com/vlad/planets
+From https://git.ecdf.ed.ac.uk/vlad/planets
  * branch            main     -> FETCH_HEAD
 Already up-to-date.
 ~~~
@@ -387,11 +385,11 @@ Already up-to-date.
 
 Pulling has no effect in this case because the two repositories are already
 synchronized.  If someone else had pushed some changes to the repository on
-GitHub, though, this command would download them to our local repository.
+GitLab, though, this command would download them to our local repository.
 
-> ## GitHub GUI
+> ## GitLab GUI
 >
-> Browse to your `planets` repository on GitHub.
+> Browse to your `planets` repository on GitLab.
 > Under the Code tab, find and click on the text that says "XX commits" (where "XX" is some number).
 > Hover over, and click on, the three buttons to the right of each commit.
 > What information can you gather/explore from these buttons?
@@ -416,25 +414,25 @@ GitHub, though, this command would download them to our local repository.
 > {: .solution}
 {: .challenge}
 
-> ## Uploading files directly in GitHub browser
+> ## Uploading files directly in GitLab browser
 >
-> Github also allows you to skip the command line and upload files directly to 
+> GitLab also allows you to skip the command line and upload files directly to 
 > your repository without having to leave the browser. There are two options. 
 > First you can click the "Upload files" button in the toolbar at the top of the
 > file tree. Or, you can drag and drop files from your desktop onto the file 
-> tree. You can read more about this [on this GitHub page](https://help.github.com/articles/adding-a-file-to-a-repository/)
+> tree. You can read more about this [on this GitLab page](https://docs.gitlab.com/ee/gitlab-basics/add-file.html)
 {: .callout}
 
-> ## GitHub Timestamp
+> ## GitLab Timestamp
 >
-> Create a remote repository on GitHub. Push the contents of your local
+> Create a remote repository on GitLab. Push the contents of your local
 > repository to the remote. Make changes to your local repository and push these
-> changes. Go to the repo you just created on GitHub and check the
-> [timestamps]({{ page.root }}{% link reference.md %}#timestamp) of the files. How does GitHub
+> changes. Go to the repo you just created on GitLab and check the
+> [timestamps]({{ page.root }}{% link reference.md %}#timestamp) of the files. How does GitLab
 > record times, and why?
 >
 > > ## Solution
-> > GitHub displays timestamps in a human readable relative format (i.e. "22 hours ago" or "three 
+> > GitLab displays timestamps in a human readable relative format (i.e. "22 hours ago" or "three 
 > > weeks ago"). However, if you hover over the timestamp, you can see the exact time at which the 
 > > last change to the file occurred.
 > {: .solution}
@@ -452,14 +450,14 @@ GitHub, though, this command would download them to our local repository.
 > {: .solution}
 {: .challenge}
 
-> ## GitHub License and README files
+> ## GitLab License and README files
 >
-> In this episode we learned about creating a remote repository on GitHub, but when you initialized 
-> your GitHub repo, you didn't add a README.md or a license file. If you had, what do you think 
+> In this episode we learned about creating a remote repository on GitLab, but when you initialized 
+> your GitLab repo, you didn't add a README.md or a license file. If you had, what do you think 
 > would have happened when you tried to link your local and remote repositories?
 >
 > > ## Solution
-> > In this case, we'd see a merge conflict due to unrelated histories. When GitHub creates a 
+> > In this case, we'd see a merge conflict due to unrelated histories. When GitLab creates a 
 > > README.md file, it performs a commit in the remote repository. When you try to pull the remote 
 > > repository to your local repository, Git detects that they have histories that do not share a 
 > > common origin and refuses to merge.
@@ -474,7 +472,7 @@ GitHub, though, this command would download them to our local repository.
 > > remote: Counting objects: 100% (3/3), done.
 > > remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
 > > Unpacking objects: 100% (3/3), done.
-> > From https://github.com/vlad/planets
+> > From https://git.ecdf.ed.ac.uk/vlad/planets
 > >  * branch            main     -> FETCH_HEAD
 > >  * [new branch]      main     -> origin/main
 > > fatal: refusing to merge unrelated histories
@@ -490,7 +488,7 @@ GitHub, though, this command would download them to our local repository.
 > > {: .language-bash}
 > >
 > > ~~~
-> > From https://github.com/vlad/planets
+> > From https://git.ecdf.ed.ac.uk/vlad/planets
 > >  * branch            main     -> FETCH_HEAD
 > > Merge made by the 'recursive' strategy.
 > > README.md | 1 +
