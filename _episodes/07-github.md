@@ -86,7 +86,7 @@ Click on the 'SSH' link to change the [protocol]({{ page.root }}{% link referenc
 > and concepts of SSH and key pairs, and other material supplemental to git related SSH. 
 {: .callout}
 
-![Changing the Repository URL on GitLab](../fig/gitlab-change-repo-string.png)
+![Changing the Repository URL on GitLab](../fig/gitlab-find-repo-string.png)
 
 Copy that URL from the browser, go into the local `planets` repository, and run
 this command:
@@ -267,8 +267,10 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDmRA3d51X0uu9wXek559gfn6UFNF69yZjChyBIU2qKI
 ~~~
 {: .output}
 
-Now, going to Git.ecdf.ed.ac.uk, click on your profile icon in the top right corner to get the drop-down menu.  Click "Settings," then on the 
-settings page, click "SSH and GPG keys," on the left side "Account settings" menu.  Click the "New SSH key" button on the right side. Now, 
+![Setup ssh key on gitlab](../fig/fig/gitlab-ssh-key.png)
+
+Now, going to git.ecdf.ed.ac.uk, click on your profile icon in the top right corner to get the drop-down menu.  Click "Preferences," then on the 
+settings page, click "SSH keys," on the left side "Account settings" menu. Paste your public SSH key, which is usually contained in the file `~/.ssh/id_ed25519.pub` or `~/.ssh/id_rsa.pub` and begins with `ssh-ed25519` or `ssh-rsa`. Do not paste your private SSH key, as that can compromise your identity. Click the "Add  key" button on the right side. Now, 
 you can add the title (Dracula uses the title "Vlad's Lab Laptop" so he can remember where the original key pair
 files are located), paste your SSH key into the field, and click the "Add SSH key" to complete the setup.
 
